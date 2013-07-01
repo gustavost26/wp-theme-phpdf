@@ -1,10 +1,11 @@
 <?php
 
-// Configuração de thumbs
 add_theme_support( 'post-thumbnails' ); 
 set_post_thumbnail_size( 100, 70, true ); // 50 pixels wide by 50 pixels tall, crop mode
 
-// Campos personalizados da conta de usuário
+// Add Twitter, Facebook and Google+ field to contact methods, remove AIM, YIM and Jabber
+// http://wp.me/p1Ehkq-fX
+ 
 add_filter( 'user_contactmethods', 'ts_add_contact_fields' );
 function ts_add_contact_fields( $contactmethods ) {
     $contactmethods['github'] = 'URL do Github';
@@ -19,7 +20,7 @@ function ts_add_contact_fields( $contactmethods ) {
     return $contactmethods;
 }
 
-// Widgets home page 1
+// Widgets home page
 register_sidebar(array(
     'id' => 'home_widget_1',
     'name' => 'Home Widget 1',
@@ -29,7 +30,6 @@ register_sidebar(array(
     'after_title' => ''
 ));
 
-// Widgets home page 2
 register_sidebar(array(
     'id' => 'home_widget_2',
     'name' => 'Home Widget 2',
@@ -39,7 +39,6 @@ register_sidebar(array(
     'after_title' => ''
 ));
 
-// Widgets home page 3
 register_sidebar(array(
     'id' => 'home_widget_3',
     'name' => 'Home Widget 3',
@@ -49,7 +48,6 @@ register_sidebar(array(
     'after_title' => ''
 ));
 
-// Widgets home page 4
 register_sidebar(array(
     'id' => 'home_widget_4',
     'name' => 'Home Widget 4',
@@ -59,7 +57,6 @@ register_sidebar(array(
     'after_title' => ''
 ));
 
-// Barra lateral de artigos
 register_sidebar(array(
     'id' => 'single_sidebar',
     'name' => 'Single Sidebar',
@@ -69,7 +66,6 @@ register_sidebar(array(
     'after_title' => '</h2>'
 ));
 
-// Barra lategal de categorias
 register_sidebar(array(
     'id' => 'category_sidebar',
     'name' => 'Category Sidebar',
@@ -79,7 +75,6 @@ register_sidebar(array(
     'after_title' => '</h2>'
 ));
 
-// Barra lateral das páginas
 register_sidebar(array(
     'id' => 'page_sidebar',
     'name' => 'Page Sidebar',
@@ -89,9 +84,7 @@ register_sidebar(array(
     'after_title' => '</h2>'
 ));
 
-/**
- * Função de comentários de artigos
- */
+
 function phpdf_comment($comment, $args, $depth) {
         $GLOBALS['comment'] = $comment;
         extract($args, EXTR_SKIP);
@@ -111,4 +104,13 @@ function phpdf_comment($comment, $args, $depth) {
 
     <?php
 
+}
+
+function is_type_page() { // Check if the current post is a page
+    global $post;
+
+    if ($post->post_type == 'page') {
+        return true;
+    }
+    return false;
 }

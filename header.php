@@ -3,10 +3,11 @@
     <head>
         <meta charset="<?php bloginfo('charset'); ?>">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title><?php wp_title( '|', true, 'right' ); bloginfo( 'name' ); ?></title>
+        <title><?php wp_title( '|', true, 'right' ); ?></title>
 
         <link rel="shortcut icon" href="<?php echo site_url(); ?>/favicon.ico" />
         <link type="text/css" rel="stylesheet" href="<?php bloginfo( 'stylesheet_url' ); ?>" />
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" rel="stylesheet" type="text/css">
 
         <?php wp_head(); ?>
 
@@ -16,14 +17,37 @@
     </head>
     <body>
         <header id="header">
-            <div class="width_default">
-                <a href="<?php echo site_url(''); ?>" class="logo"><img src="<?php bloginfo('template_url'); ?>/images/php_df.png" alt="<?php echo bloginfo('name'); ?>"></a>
-                <nav>
-                    <a href="<?php echo site_url(''); ?>" title="Página principal">Início</a>
-                    <a href="<?php echo site_url('novidades'); ?>" title="Novidades PHP-DF">Novidades</a>
-                    <a href="<?php echo site_url('empregos'); ?>" title="Vagas de emprego no DF">Emprego</a>
-                    <a href="<?php echo site_url('contato'); ?>" title="Entre em contato">Contato</a>
-                </nav>
+            <div id="header_top" class="width_default">
+                <a href="<?php echo site_url(''); ?>" id="header_logo"><img src="<?php bloginfo('template_url'); ?>/images/php_df.png" alt="<?php echo bloginfo('name'); ?>"></a>
+                <span class="site_desc">Comunidade do Distrito Federal</span>
+
+                <form method="get" action="<?php echo site_url(); ?>">
+                    <input type="text" name="s" placeholder="Faça uma busca" value="<?php the_search_query(); ?>" />
+                </form>
             </div>
-            <div class="clear"></div>
+            <div id="header_menu">
+                
+                <nav class="width_default">
+                    <a href="#" id="show_menu">Menu</a>
+                    <ul>
+                        <li><a href="<?php echo site_url(''); ?>" title="Página principal">Início</a></li>
+                        <li><a href="<?php echo site_url('artigos/novidades'); ?>" title="Novidades PHP-DF">Novidades</a></li>
+                        <li>
+                            <a href="<?php echo site_url('artigos/tutoriais-dicas'); ?>" title="Dicas e tutoriais">Dicas e tutoriais</a>
+                            <ul>
+                                <li><a href="<?php echo site_url('artigos/tutoriais-dicas/zce'); ?>" title="Certificação Zend">ZCE</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="<?php echo site_url('membros'); ?>" title="Membros da comunidade">Membros</a></li>
+                        <li><a href="<?php echo site_url('contato'); ?>" title="Entre em contato">Contato</a></li>
+                        
+                        <?php if( is_user_logged_in() ): ?>
+                            <li class="account"><a href="<?php echo site_url(''); ?>/wp-login.php" class="alignright" title="Fazer login">Login</a></li>
+                            <li class="account"><a href="<?php echo site_url(); ?>/wp-login.php?action=register" title="Cadastre-se na comunidade">Cadastre-se</a></li>
+                        <?php endif; ?>
+                    </ul>
+                </nav>
+                <div class="clear"></div>
+            </div>
+            
         </header>

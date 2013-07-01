@@ -1,7 +1,9 @@
 $(function(){
 
+    // Tooltip
     $(".tipsy_se").tipsy({gravity: 'se'});
 
+    // Comentar
     $(".leave_comment").click(function(){
         var btn = $(this);
         $("#comment_form").slideDown(500, function(){
@@ -12,6 +14,42 @@ $(function(){
                 "opacity" : "0"
             }, 700);
         });
+    });
+
+    // Menu drop down header
+    $("#header_menu ul li").hover(function(){
+        if( $(window).width() > 860 ) {
+            if( $(this).children("ul").length > 0 ) {
+                $(this).children("ul").show();
+            }
+        }
+    }).mouseleave(function(){
+        if( $(window).width() > 860 ) {
+            if( $(this).children("ul").length > 0 ) {
+                $(this).children("ul").hide();
+            }
+        }
+    });
+
+    // Abrir menu para mobile
+    $("#show_menu").click(function(){
+        var el = $("#header_menu nav ul");
+
+        if(el.is(":visible")) {
+            el.slideUp(500);
+        }
+        else {
+            el.slideDown(500);
+        }
+        return false;
+    });
+
+    $(window).resize(function(){
+        var header_menu = $("#header_menu nav ul");
+        if(!header_menu.is(":visible") && $(window).width() > 860 ) {
+            header_menu.show();
+            $("#header_menu ul li ul").hide();
+        }
     });
 
 
