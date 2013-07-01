@@ -41,9 +41,12 @@
                         <li><a href="<?php echo site_url('membros'); ?>" title="Membros da comunidade">Membros</a></li>
                         <li><a href="<?php echo site_url('contato'); ?>" title="Entre em contato">Contato</a></li>
                         
-                        <?php if( is_user_logged_in() ): ?>
-                            <li class="account"><a href="<?php echo site_url(''); ?>/wp-login.php" class="alignright" title="Fazer login">Login</a></li>
+                        <?php if( !is_user_logged_in() ): ?>
+                            <li class="account"><a href="<?php echo site_url(); ?>/wp-login.php" class="alignright" title="Fazer login">Login</a></li>
                             <li class="account"><a href="<?php echo site_url(); ?>/wp-login.php?action=register" title="Cadastre-se na comunidade">Cadastre-se</a></li>
+                        <?php else: ?>
+                            <li class="account"><a href="<?php echo site_url(); ?>/wp-admin/profile.php" title="Meu perfil">Meu perfil</a></li>
+                            <li class="account"><a href="<?php echo site_url(); ?>/wp-admin/" title="Painel de controle">Painel</a></li>
                         <?php endif; ?>
                     </ul>
                 </nav>
